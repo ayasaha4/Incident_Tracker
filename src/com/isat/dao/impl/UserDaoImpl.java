@@ -9,9 +9,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-@Service(value="UserDao")
+@Repository(value="UserDao")
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
@@ -28,8 +28,7 @@ public class UserDaoImpl implements UserDao {
 		 */}
 
 	public User validateUser(Login login) {
-		String sql = "select * from Incident_assignee where assgn_id='" + login.getUserid() + "' and password='"
-				+ login.getPassword() + "'";
+		String sql = "select * from EAI.TEMP_INCIDENT_USER where user_id=" + login.getUserid()+"";
 		List<User> users = jdbcTemplate.query(sql, new UserMapper());
 		return users.get(0);
 	}
@@ -38,7 +37,7 @@ public class UserDaoImpl implements UserDao {
 class UserMapper implements RowMapper<User> {
 	public User mapRow(ResultSet rs, int arg1) throws SQLException {
 		User user = new User();
-		user.setAssignee_id(rs.getString("assgn_id"));
+		user.setAssignee_id(rs.getString("user_id"));
 		user.setEmail(rs.getString("email"));
 		user.setPhone(Integer.parseInt(rs.getString("phone")));
 		return user;

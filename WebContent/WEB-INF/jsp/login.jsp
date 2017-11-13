@@ -19,18 +19,18 @@
       <div class="formholder">
         <div class="randompad">
            <fieldset id="loginForm" modelAttribute="login" action="loginProcess" method="post">
-           <!-- <form:form id="loginForm" modelAttribute="login" action="loginProcess" method="post">
+           <form:form id="loginForm" modelAttribute="login" action="loginProcess" method="post">
            <form:label path="username">Username: </form:label>
            <form:input path="username" name="username" id="username" />
            <form:label path="password">Password:</form:label>
            <form:password path="password" name="password" id="password" />
            <form:button id="login" name="login">Login</form:button>
-           </form:form> -->
-             <label name="email">Email</label>
+           </form:form>
+             <!-- <label name="email">Email</label>
              <input type="email" value="example@example.com" />
              <label name="password">Password</label>
              <input type="password" />
-             <input type="submit" value="login" action="loginProcess" />
+             <input type="submit" value="login" action="loginProcess" /> -->
  
            </fieldset>
         </div>

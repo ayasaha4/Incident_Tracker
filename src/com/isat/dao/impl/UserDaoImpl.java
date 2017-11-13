@@ -2,7 +2,6 @@ package com.isat.dao.impl;
 
 import com.isat.pojo.Login;
 import com.isat.pojo.User;
-import com.isat.service.UserDao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -10,11 +9,14 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Service;
 
+@Service(value="UserDao")
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	DataSource datasource;
+	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
@@ -29,7 +31,7 @@ public class UserDaoImpl implements UserDao {
 		String sql = "select * from Incident_assignee where assgn_id='" + login.getUserid() + "' and password='"
 				+ login.getPassword() + "'";
 		List<User> users = jdbcTemplate.query(sql, new UserMapper());
-		return users.size() > 0 ? users.get(0) : null;
+		return users.get(0);
 	}
 }
 

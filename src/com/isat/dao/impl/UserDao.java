@@ -1,4 +1,4 @@
-package com.isat.service;
+package com.isat.dao.impl;
 
 import com.isat.pojo.*;
 

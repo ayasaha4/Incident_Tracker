@@ -25,8 +25,8 @@
            
            <table>
            <tr>
-           <td><form:label path="userid">Username: </form:label></td>
-           <td><form:input path="userid" name="userid" id="userid" /></td>
+           <td><form:label path="userId">Username: </form:label></td>
+           <td><form:input path="userId" name="userId" id="userId" /></td>
            </tr>
            <tr>
            <td><form:label path="password">Password:</form:label></td>

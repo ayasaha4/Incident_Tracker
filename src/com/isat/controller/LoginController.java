@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.isat.pojo.Login;
 import com.isat.pojo.User;
 import com.isat.service.LoginService;
 
@@ -23,23 +22,22 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("login");
-		mav.addObject("login", new Login());
+		mav.addObject("login", new User());
 		return mav;
 	}
 
 	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
 	public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("login") Login login) {
+			@ModelAttribute("loginUser") User user) {
 		ModelAndView mav = null;
-		User user = loginService.checkUser(login);
+		User loginUser = loginService.checkUser(user);
 
-		if (null != user) {
+		if (loginUser != null) {
 			mav = new ModelAndView("welcome");
-			mav.addObject("UserEmail", user.getEmail());
+			mav.addObject("UserEmail", loginUser.getEmail());
+			System.out.println(loginUser.getEmail());
 
-		}
-
-		else {
+		}else {
 			mav = new ModelAndView("login");
 			mav.addObject("message", "Username or Password is wrong!!");
 		}

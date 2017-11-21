@@ -6,7 +6,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <title>Login</title>
-    <link rel="stylesheet" href="WebContent/WEB-INF/resources/css/style.css">
+    <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/style.css"> --%>
 </head>
 
 <body>

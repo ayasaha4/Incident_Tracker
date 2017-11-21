@@ -2,6 +2,7 @@ package com.isat.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.isat.pojo.User;
@@ -9,7 +10,7 @@ import com.isat.pojo.User;
 @Controller
 public class HomePageController {
 
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView showHomePage() {
 
 		ModelAndView mav = new ModelAndView("login");

@@ -7,6 +7,7 @@ public class User {
 	private String password;
 	private String phone;
 	private String email;
+	private String location;
 
 	public String getUserId() {
 		return userId;
@@ -46,6 +47,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 }

@@ -6,16 +6,20 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.isat.controller.LoginController;
 import com.isat.dao.LoginDao;
 import com.isat.pojo.User;
 
 @Repository(value = "UserDao")
 public class LoginDaoImpl implements LoginDao {
+	
+	private static final Logger logger = Logger.getLogger(LoginDaoImpl.class);
 
 	@Autowired
 	DataSource datasource;
@@ -23,13 +27,13 @@ public class LoginDaoImpl implements LoginDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	public void register(User user) {
-		/*
-		 * String sql = "insert into users values(?,?,?,?)";
-		 * jdbcTemplate.update(sql, new Object[] { user.get, user.getPassword(),
-		 * user.getFirstname(), user.getLastname(), user.getEmail(),
-		 * user.getAddress(), user.getPhone() });
-		 */}
+	public int register(User user) {
+		
+		  String sql = "insert into EAI.TEMP_INCIDENT_USER values(?,?,?,?,?,?)";
+		  int i=jdbcTemplate.update(sql, new Object[] {"'TEMP_INCIDENT_USER_ID.nextVal'", user.getUserName(),user.getPassword(), user.getEmail(), user.getPhone(),user.getLocation()});
+		  logger.info(user);
+		  return i;
+		 }
 
 	public User validateUser(User user) throws Exception{
 		String sql = "select * from EAI.TEMP_INCIDENT_USER where user_id=" + user.getUserId() + "";

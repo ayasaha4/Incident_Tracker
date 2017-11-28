@@ -14,6 +14,24 @@ public class HomePageController {
 	public ModelAndView showHomePage() {
 
 		ModelAndView mav = new ModelAndView("login");
+		mav.addObject("login",new User());
+		/*mav.addObject("register",new User());*/
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView showregisterPage() {
+
+		ModelAndView mav = new ModelAndView("register");
+		mav.addObject("register",new User());
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView showLogin() {
+		ModelAndView mav = new ModelAndView("login");
 		mav.addObject("login", new User());
 		return mav;
 	}

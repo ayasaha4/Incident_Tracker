@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.isat.pojo.User;
 import com.isat.service.LoginService;
+import com.isat.service.RegisterService;
 
 @Controller
 public class LoginController {
@@ -22,18 +23,17 @@ public class LoginController {
 
 	@Autowired
 	LoginService loginService;
+	
+	@Autowired
+	RegisterService registerService;
 
-	/*@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView("login");
-		mav.addObject("login", new User());
-		return mav;
-	}*/
+	
 
 	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
 	public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("loginUser") User user) {
+			@ModelAttribute User user) {
 		ModelAndView mav = null;
+		System.out.println(user.getUserId()+"---------------------------------------");
 		User loginUser = loginService.checkUser(user);
 
 		if (loginUser != null) {
@@ -47,6 +47,27 @@ public class LoginController {
 		}else {
 			mav = new ModelAndView("login");
 			mav.addObject("message", "Username or Password is wrong!!");
+		}
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
+	public ModelAndView registerProcess(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute User user) {
+		ModelAndView mav = null;
+		int registerUsercounter = registerService.insertUser(user);
+
+		if (registerUsercounter != 0) {
+			mav = new ModelAndView("error");
+			/*mav.addObject("UserEmail", loginUser.getEmail());*/
+			logger.info("User Registered Successfully");
+			System.out.println("User Registered Successfully");
+
+
+		}else {
+			mav = new ModelAndView("error");
+			mav.addObject("message", "User not Registered Successfully");
 		}
 		return mav;
 	}

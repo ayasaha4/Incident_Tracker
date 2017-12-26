@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySources;
  
 @Configuration
 @PropertySources({
-    @PropertySource("/resources/properties/jdbc.properties"),
+    //@PropertySource("/resources/properties/jdbc.properties"),
     @PropertySource("/resources/properties/dashboard.properties")
 })
 

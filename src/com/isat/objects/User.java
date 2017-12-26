@@ -1,4 +1,4 @@
-package com.isat.pojo;
+package com.isat.objects;
 
 public class User {
 

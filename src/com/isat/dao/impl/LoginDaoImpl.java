@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.isat.controller.LoginController;
 import com.isat.dao.LoginDao;
-import com.isat.pojo.User;
+import com.isat.objects.User;
 
 @Repository(value = "UserDao")
 public class LoginDaoImpl implements LoginDao {

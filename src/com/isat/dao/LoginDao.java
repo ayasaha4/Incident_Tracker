@@ -1,6 +1,6 @@
 package com.isat.dao;
 
-import com.isat.pojo.User;
+import com.isat.objects.User;
 
 public interface LoginDao {
 

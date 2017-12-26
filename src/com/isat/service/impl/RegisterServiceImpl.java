@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.isat.dao.LoginDao;
-import com.isat.pojo.User;
+import com.isat.objects.User;
 import com.isat.service.RegisterService;
 
 @Service(value = "RegisterService")

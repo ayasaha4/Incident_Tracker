@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
@@ -40,9 +39,7 @@
 					<tr align="right">
 						<td><form:button id="login" name="login">Login</form:button></td>
 
-						<p class="message">
-							Not registered? <a href=register>Create an account</a>
-						</p>
+						<p class="message">Not registered? <a href=register>Create an account</a></p>
 
 					</tr>
 				</table>

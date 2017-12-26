@@ -1,6 +1,6 @@
 package com.isat.service;
 
-import com.isat.pojo.User;
+import com.isat.objects.User;
 
 public interface LoginService {
 

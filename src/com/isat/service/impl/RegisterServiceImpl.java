@@ -26,6 +26,9 @@ public class RegisterServiceImpl implements RegisterService {
 				return registerUsercounter;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info(e.getMessage());
+			System.out.println(e.getMessage());
 
 		}
 		return 0;

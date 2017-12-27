@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-           USER Registered Successfully.
+           User Didn't Registered Successfully.
 </body>
 </html>

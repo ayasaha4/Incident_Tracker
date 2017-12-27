@@ -20,77 +20,73 @@ import com.isat.service.RegisterService;
 public class HomePageController {
 
 	private static final Logger logger = Logger.getLogger(HomePageController.class);
-	
+
 	@Autowired
-	PropertyService propertyService ;
-	
+	PropertyService propertyService;
+
 	@Autowired
 	LoginService loginService;
-	
+
 	@Autowired
 	RegisterService registerService;
 
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView showHomePage() {
-        
-		propertyService.readValues("error");
 		ModelAndView mav = new ModelAndView("login");
-		mav.addObject("login",new User());
+		mav.addObject("login", new User());
 		return mav;
 	}
-	
-	
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView showregisterPage() {
 		ModelAndView mav = new ModelAndView("register");
-		mav.addObject("register",new User());
+		mav.addObject("register", new User());
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
 	public ModelAndView registerProcess(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute User user) {
 		ModelAndView mav = null;
-		int registerUsercounter = registerService.insertUser(user);
-
-		if (registerUsercounter != 0) {
-			mav = new ModelAndView("error");
+		try {
+			int registerUsercounter = registerService.insertUser(user);
+			mav = new ModelAndView("newuser");
+			mav.addObject("message", user.getEmail());
 			logger.info("User Registered Successfully");
 			System.out.println("User Registered Successfully");
-
-
-		}else {
+		} catch (Exception ex) {
+			ex.printStackTrace();
 			mav = new ModelAndView("error");
-			mav.addObject("message", "User not Registered Successfully");
+			mav.addObject("message", ex.getMessage());
 		}
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView showLogin() {
 		ModelAndView mav = new ModelAndView("login");
 		mav.addObject("login", new User());
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-	public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response, @ModelAttribute User user) {
+	public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute User user) {
 		ModelAndView mav = null;
-		System.out.println(user.getUserId()+"---------------------------------------");
+		System.out.println(user.getUserId() + "---------------------------------------");
 		User loginUser = loginService.checkUser(user);
 
 		if (loginUser != null) {
 			mav = new ModelAndView("welcome");
 			mav.addObject("UserEmail", loginUser.getEmail());
 			logger.info(loginUser.getEmail());
-		}else {
+		} else {
 			mav = new ModelAndView("login");
-			mav.addObject("login",new User());
+			mav.addObject("login", new User());
 		}
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/viewIncidents", method = RequestMethod.GET)
 	public ModelAndView viewIncidents() {
 		ModelAndView mav = new ModelAndView("viewIncidents");

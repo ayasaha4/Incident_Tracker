@@ -10,5 +10,23 @@
 
 <body>
 	
+	<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s8 w3-bar">
+      <span>Welcome, <strong>${UserEmail}</strong></span><br>
+    </div>
+  </div>
+  <hr>
+  <div class="w3-bar-block">
+    <a href="viewIncidents" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" title="close menu"><i class="fa fa-remove fa-fw"></i>  View Incident</a>
+   
+    
+  </div>
+</nav>
+	
+	
+	
+	
 </body>
 </html>

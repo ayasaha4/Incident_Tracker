@@ -90,4 +90,11 @@ public class HomePageController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping(value = "/viewIncidents", method = RequestMethod.GET)
+	public ModelAndView viewIncidents() {
+		ModelAndView mav = new ModelAndView("viewIncidents");
+		mav.addObject("login", new User());
+		return mav;
+	}
 }

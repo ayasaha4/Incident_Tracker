@@ -11,15 +11,8 @@ public class IncidentTrackerBusinessException extends Exception {
 	private String errorMessage;
 
 	public IncidentTrackerBusinessException(String errorCode, String errorMessage) {
-		super();
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
-	}
-
-	public IncidentTrackerBusinessException(String errorCode, Exception exception) {
-		super();
-		this.errorCode = errorCode;
-		this.errorMessage = exception.getMessage();
 	}
 
 	public String getErrorCode() {
@@ -37,4 +30,5 @@ public class IncidentTrackerBusinessException extends Exception {
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
+
 }

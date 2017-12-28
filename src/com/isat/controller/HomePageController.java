@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.isat.exception.IncidentTrackerBusinessException;
 import com.isat.objects.User;
 import com.isat.service.LoginService;
 import com.isat.service.PropertyService;
@@ -73,15 +74,17 @@ public class HomePageController {
 	public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute User user) {
 		ModelAndView mav = null;
-		System.out.println(user.getUserId() + "---------------------------------------");
-		User loginUser = loginService.checkUser(user);
-
-		if (loginUser != null) {
-			mav = new ModelAndView("welcome");
-			mav.addObject("UserEmail", loginUser.getEmail());
-			logger.info(loginUser.getEmail());
-		} else {
+		try {
+			logger.debug(user.getUserName() + "---------------------------------------"+user.getPassword());
+			User loginUser = loginService.checkUser(user);
+			if (loginUser != null) {
+				mav = new ModelAndView("welcome");
+				mav.addObject("UserEmail", loginUser.getEmail());
+				logger.info(loginUser.getEmail());
+			}
+		} catch (IncidentTrackerBusinessException e) {
 			mav = new ModelAndView("login");
+			mav.addObject("message", propertyService.readValues(e.getErrorCode()));
 			mav.addObject("login", new User());
 		}
 		return mav;

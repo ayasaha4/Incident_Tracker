@@ -3,7 +3,6 @@ package com.isat.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -17,6 +16,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
+import com.isat.common.SQLConstants;
 import com.isat.dao.LoginDao;
 import com.isat.objects.User;
 
@@ -56,9 +56,9 @@ public class LoginDaoImpl implements LoginDao {
 
 	@Override
 	public User validateUser(User user) throws Exception {
-		String sql = "select * from EAI.TEMP_INCIDENT_USER where user_id=" + user.getUserId() + "";
-		List<User> users = jdbcTemplate.query(sql, new UserMapper());
-		return users.get(0);
+		User loginUser = jdbcTemplate.queryForObject(SQLConstants.IS_VALID_USER,
+				new Object[] { user.getUserName(), user.getPassword() }, new UserMapper());
+		return loginUser;
 	}
 
 }

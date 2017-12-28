@@ -2,9 +2,12 @@ package com.isat.service.impl;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.isat.common.StaticVariable;
 import com.isat.dao.LoginDao;
+import com.isat.exception.IncidentTrackerBusinessException;
 import com.isat.objects.User;
 import com.isat.service.LoginService;
 
@@ -17,20 +20,18 @@ public class LoginServiceImpl implements LoginService {
 	LoginDao loginDao;
 
 	@Override
-	public User checkUser(User user) {
+	public User checkUser(User user) throws IncidentTrackerBusinessException {
 		
 		User loginUser = null;
 		try {
 			loginUser = loginDao.validateUser(user);
-			if (loginUser != null) {
-				logger.info("User is not null");
-				//return loginUser;
-			}
 		} catch (Exception e) {
-			//return null;
+			if(e instanceof EmptyResultDataAccessException){
+				throw new IncidentTrackerBusinessException(StaticVariable.LOGIN_FAILURE,null);
+			}else {
+				throw new IncidentTrackerBusinessException(StaticVariable.INTERNAL_FAILURE, null);
+			}
 		}
 		return loginUser;
-
 	}
-
 }

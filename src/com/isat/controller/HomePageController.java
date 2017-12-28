@@ -15,7 +15,6 @@ import com.isat.exception.IncidentTrackerBusinessException;
 import com.isat.objects.User;
 import com.isat.service.LoginService;
 import com.isat.service.PropertyService;
-import com.isat.service.RegisterService;
 
 @Controller
 public class HomePageController {
@@ -27,9 +26,6 @@ public class HomePageController {
 
 	@Autowired
 	LoginService loginService;
-
-	@Autowired
-	RegisterService registerService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView showHomePage() {
@@ -50,15 +46,16 @@ public class HomePageController {
 			@ModelAttribute User user) {
 		ModelAndView mav = null;
 		try {
-			int registerUsercounter = registerService.insertUser(user);
+			loginService.insertUser(user);
 			mav = new ModelAndView("newuser");
 			mav.addObject("message", user.getEmail());
 			logger.info("User Registered Successfully");
 			System.out.println("User Registered Successfully");
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			mav = new ModelAndView("error");
-			mav.addObject("message", ex.getMessage());
+		} catch (IncidentTrackerBusinessException ex) {
+			logger.error("Error occured during user registration "+ex.getMessage());
+			mav = new ModelAndView("register");
+			mav.addObject("register", new User());
+			mav.addObject("message", propertyService.readValues(ex.getErrorCode()));
 		}
 		return mav;
 	}
@@ -75,7 +72,7 @@ public class HomePageController {
 			@ModelAttribute User user) {
 		ModelAndView mav = null;
 		try {
-			logger.debug(user.getUserName() + "---------------------------------------"+user.getPassword());
+			logger.debug(user.getUserName() + "-------------------" + user.getPassword());
 			User loginUser = loginService.checkUser(user);
 			if (loginUser != null) {
 				mav = new ModelAndView("welcome");

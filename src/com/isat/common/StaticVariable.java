@@ -7,5 +7,6 @@ public class StaticVariable {
 	
 	public static final String LOGIN_FAILURE = "login_failure";
 	public static final String INTERNAL_FAILURE = "internal_failure";
+	public static final String DUP_USER = "duplicate_user";
 
 }

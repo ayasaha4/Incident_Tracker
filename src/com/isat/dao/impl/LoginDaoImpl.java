@@ -39,17 +39,17 @@ public class LoginDaoImpl implements LoginDao {
 				.withProcedureName("CREATE_USER");
 
 		Map<String, Object> inParamMap = new HashMap<String, Object>();
-		inParamMap.put("USER_NAME", user.getUserName());
-		inParamMap.put("PASSWD", user.getPassword());
-		inParamMap.put("EMAIL", user.getEmail());
-		inParamMap.put("PHONE", user.getPhone());
-		inParamMap.put("LOC", user.getLocation());
+		inParamMap.put("USER_NAME", user.getUserName().trim());
+		inParamMap.put("PASSWD", user.getPassword().trim());
+		inParamMap.put("EMAIL", user.getEmail().trim());
+		inParamMap.put("PHONE", user.getPhone().trim());
+		inParamMap.put("LOC", user.getLocation().trim());
 		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 
 		Map<String, Object> mapResult = simpleJdbcCall.execute(in);
-		System.out.println("------------------------------------------------>>>>>>>>>>>" + mapResult.keySet().toString()
-				+ "---- " + mapResult.get("STATUS"));
-
+		if(mapResult.get("STATUS")!=null){
+			execusionStatus = Integer.parseInt(mapResult.get("STATUS").toString());
+		}
 		return execusionStatus;
 
 	}
@@ -57,7 +57,7 @@ public class LoginDaoImpl implements LoginDao {
 	@Override
 	public User validateUser(User user) throws Exception {
 		User loginUser = jdbcTemplate.queryForObject(SQLConstants.IS_VALID_USER,
-				new Object[] { user.getUserName(), user.getPassword() }, new UserMapper());
+				new Object[] { user.getUserName().trim(), user.getPassword().trim() }, new UserMapper());
 		return loginUser;
 	}
 

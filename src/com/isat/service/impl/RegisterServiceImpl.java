@@ -9,29 +9,4 @@ import com.isat.objects.User;
 import com.isat.service.RegisterService;
 
 @Service(value = "RegisterService")
-public class RegisterServiceImpl implements RegisterService {
-
-	private static final Logger logger = Logger.getLogger(RegisterServiceImpl.class);
-
-	@Autowired
-	LoginDao loginDao;
-
-	@Override
-	public int insertUser(User user) {
-		try {
-			int registerUsercounter = loginDao.register(user);
-			if (registerUsercounter != 0) {
-				logger.info(registerUsercounter + "rows updated Successfully");
-				System.out.println(registerUsercounter + "rows updated Successfully");
-				return registerUsercounter;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.info(e.getMessage());
-			System.out.println(e.getMessage());
-
-		}
-		return 0;
-	}
-
-}
+public class RegisterServiceImpl implements RegisterService {}

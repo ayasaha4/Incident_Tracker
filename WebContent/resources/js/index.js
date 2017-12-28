@@ -29,6 +29,11 @@ $(document).ready(function() {
         }
     });
     
+    jQuery.validator.addMethod("laxEmail", function(value, element) {
+    	  // allow any non-whitespace characters as the host part
+    	  return this.optional( element ) || /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/.test( value );
+    	}, 'Please enter a valid email address.');
+
     
     $("#registerForm").validate({
         rules: {
@@ -40,7 +45,7 @@ $(document).ready(function() {
             },
             "email": {
                 required: true,
-                eamil: true
+                laxEmail: true
             },
             "phone": {
                 required: true
@@ -57,7 +62,8 @@ $(document).ready(function() {
                 required: "Please enter Password"
             },
             "email": {
-                required: "Please enter Email address"
+                required: "Please enter Email address",
+                laxEmail: "Please enter valid Email address"
             },
             "phone": {
                 required: "Please enter Phone number"

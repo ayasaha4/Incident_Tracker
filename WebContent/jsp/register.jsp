@@ -17,10 +17,10 @@
 
 </head>
 <body>
-	<div class="login-page">
+	<div class="reg-page">
 
 		<div class="form">
-
+			<div align="center" style="color: red;padding-bottom: 10px;">${message}</div>
 			<form:form id="registerForm" class="registerform"
 				modelAttribute="register" action="registerProcess" method="post">
 

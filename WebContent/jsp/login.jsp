@@ -18,30 +18,27 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-
 </head>
-
 <body>
 	<div class="login-page">
 
 		<div class="form">
 
-			<div align="center" style="color: red;padding-bottom: 10px;">${message}</div>
+			<div align="center" style="color: red; padding-bottom: 10px;">${message}</div>
 			<form:form id="loginForm" class="login-form" modelAttribute="login"
 				action="loginProcess" method="post">
 
 				<table>
 					<tr class="row">
 						<td><form:label path="userName">Username: </form:label></td>
-						<td align="left"><form:input path="userName" name="userName" id="userName" /></td>
+						<td align="left"><form:input path="userName" name="userName"
+								id="userName" /></td>
 						<td class="error_msg">
 					</tr>
 					<tr class="row">
 						<td><form:label path="password">Password:</form:label></td>
-						<td align="left"><form:password path="password" name="password"
-								id="password" />
-						</td>
+						<td align="left"><form:password path="password"
+								name="password" id="password" /></td>
 						<td class="error_msg">
 					</tr>
 
@@ -54,8 +51,6 @@
 			<p class="message">
 				Not registered? <a href=register>Create an account</a>
 			</p>
-
-
 
 		</div>
 	</div>

@@ -25,10 +25,11 @@ public class LoginServiceImpl implements LoginService {
 		
 		User loginUser = null;
 		try {
-			if(user!=null && user.getEmail() != null && user.getPassword()!=null){
+			if(user!=null && user.getUserName() != null && user.getPassword()!=null){
 				loginUser = loginDao.validateUser(user);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error(e.getMessage());
 			if(e instanceof EmptyResultDataAccessException){
 				throw new IncidentTrackerBusinessException(StaticVariable.LOGIN_FAILURE,e.getMessage());

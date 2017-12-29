@@ -58,6 +58,7 @@ public class LoginDaoImpl implements LoginDao {
 	public User validateUser(User user) throws Exception {
 		User loginUser = jdbcTemplate.queryForObject(SQLConstants.IS_VALID_USER,
 				new Object[] { user.getUserName().trim(), user.getPassword().trim() }, new UserMapper());
+		System.out.println(loginUser);
 		return loginUser;
 	}
 

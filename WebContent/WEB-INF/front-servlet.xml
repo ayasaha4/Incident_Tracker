@@ -13,6 +13,9 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<context:annotation-config />
 	<mvc:annotation-driven />
 
+	<!-- <mvc:interceptors> <bean class="com.isat.common.URLInterceptor" /> 
+		</mvc:interceptors> -->
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -22,24 +25,33 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 			<value>.jsp</value>
 		</property>
 	</bean>
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
+
+
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:resources mapping="/config/**" location="/config/" />
 
 
 
-	<!-- <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" /> -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" 
+		/> -->
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 
-		<property name="dataSource" ref="datasource" />
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<bean id="datasource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="oracle.jdbc.xa.client.OracleXADataSource" />
-		<property name="url"
-			value="jdbc:oracle:thin:@10.34.45.72:1521:cwiowlitdb" />
-		<property name="username" value="eai" />
-		<property name="password" value="eai" />
-	</bean>
+	<!-- <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="driverClassName" value="oracle.jdbc.xa.client.OracleXADataSource" 
+		/> <property name="url" value="jdbc:oracle:thin:@10.34.45.72:1521:cwiowlitdb" 
+		/> <property name="username" value="eai" /> <property name="password" value="eai" 
+		/> </bean> -->
 
 </beans>
